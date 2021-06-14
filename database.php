@@ -1,6 +1,8 @@
 <?php
 
-class database
+namespace Todolist;
+
+class Database
 {
     private $hostname ="127.0.0.1";
     private $root = "root";
@@ -9,27 +11,26 @@ class database
     private $con ;
 
     public function __construct(){
-       $this->con = new mysqli($this->hostname,$this->root,$this->password,$this->dbname);
+       $this->con = new \mysqli($this->hostname,$this->root,$this->password,$this->dbname);
         if($this->con->connect_error){
             echo "connection failed";
         }
           return $this->con;
     }
 
-    public function getdata(){
-        $sql = "select * from Task";
+    public function getdata($table){
+        $sql = "select * from $table";
         $result = $this->con->query($sql);
-            while($row = $result->fetch_assoc()){
-                echo $row['task_description']; ?>
-                        .
-           <?php
+            while($tasks = $result->fetch_assoc()){
+                echo $tasks['task_description'] . PHP_EOL;
+
             }
     }
 
 
 
     public function insertdata($task , $action , $priority){
-        $sql = "INSERT INTO Task (task_description,`action`,priority) values ('$task','$action','$priority')";
+        $sql = "INSERT INTO task (task_description,`action`,priority) values ('$task','$action','$priority')";
         $result = $this->con->query($sql);
         return $result;
     }
@@ -37,13 +38,19 @@ class database
 
 
     public function delete($delete){
-        $sql = "DELETE FROM  Task where id=$delete";
+        $sql = "DELETE FROM  task where id=$delete";
         $result = $this->con->query($sql);
         return $result;
     }
 
-    public function edit($action , $id){
-        $query = "update Task set action='$action' where id='$id'";
+    public function updateaction($action , $id){
+        $query = "update task set action='$action' where id='$id'";
+        $result = $this->con->query($query);
+        return $result;
+    }
+
+    public function updatepriority($priority , $id){
+        $query = "update task set priority='$priority' where id='$id'";
         $result = $this->con->query($query);
         return $result;
     }
@@ -51,4 +58,7 @@ class database
 
 
 }
+
+
+
 
