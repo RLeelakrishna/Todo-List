@@ -29,7 +29,6 @@ class Database
             while($result->fetch()){
                echo "(".$id.")".$tasks."(" .(($priority))." "."priority" .")". PHP_EOL.PHP_EOL;
 
-
             }
         return $result;
     }
