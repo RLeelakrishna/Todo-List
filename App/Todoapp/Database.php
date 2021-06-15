@@ -19,15 +19,17 @@ class Database
     }
 
     public function getdata($table){
-        $sql = "select task_description from $table";
+        $sql = "select id,task_description,`priority` from $table";
         $result = $this->con->prepare($sql);
         $result->execute();
         $result->store_result();
         if($result->num_rows > 0){
-            $result->bind_result($tasks);
+            $result->bind_result($id,$tasks,$priority);
         }
             while($result->fetch()){
-               echo $tasks . PHP_EOL;
+               echo "(".$id.")".$tasks."(" .(($priority))." "."priority" .")". PHP_EOL.PHP_EOL;
+
+
             }
         return $result;
     }
@@ -40,6 +42,7 @@ class Database
         $result->execute();
         return $result;
     }
+
 
 
 
