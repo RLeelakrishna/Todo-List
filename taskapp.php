@@ -1,16 +1,17 @@
 <?php
 
-use Todolist\Database;
+use \App\Todoapp\Database as Database;
 
-include 'database.php';
+include_once 'App/autoload.php';
+
 
 $obj = new Database();
 
 
+global $argv;
 
 
-
-if($argv[1]=="getdata"){
+if($argv[1]=="list"){
     $table =  readline('Enter table name: ');
     $obj->getdata($table);
 }
