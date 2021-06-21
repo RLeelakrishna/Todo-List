@@ -6,7 +6,7 @@ use \App\Todoapp\Commands as Commands;
 include_once 'App/autoload.php';
 
 
-$obj = new Database();
+$obj = new \App\Todoapp\Todo();
 echo PHP_EOL;
 echo "Available Options : commands,list,add,delete,updateAction,updatePriority,help".PHP_EOL;
 echo "Available Actions: done , pending".PHP_EOL;
